@@ -1,0 +1,133 @@
+    symfony server:start                                // Pour commencer un serveur
+
+    symfony server:stop                                 // Pour stopper le server
+
+    symfony new --webapp nom d'application              // créer un projet dans le dossier local
+
+// ---------------------------------------------------------------------------------------------------
+ON CONFIGURE LES FICHIERS DU PROJET : .env.local / base.html.twig / DOSSIER include -> _nav/__footer/_flashes / twig.yaml -> form_themes à ajouter
+// ---------------------------------------------------------------------------------------------------
+
+    composer require symfony/webpack-encore-bundle      // Pour commencer à utiliser Symfony UX, on peut installer des UX symfony depuis leur website.
+
+    npm / yarn install                                  // pour installer les nodes_modules
+
+// ---------------------------------------------------------------------------------------------------
+METTRE A JOUR LE APP.CSS AVEC LES RESETS
+// ---------------------------------------------------------------------------------------------------
+
+    npm / yarn run dev                                  // pour compiler manuellement les modifications non compilé automatiquement
+
+// ---------------------------------------------------------------------------------------------------
+EDITER LE .GITIGNORE
+// ---------------------------------------------------------------------------------------------------
+
+    symfony console make:controller NomController       // Pour créer le premier fichier controller + d'autres fichiers
+
+// ---------------------------------------------------------------------------------------------------
+CREER LE FICHIER RENDER DE CE PREMIER CONTROLLER - show_home.html.twig
+CONFIGURER LES PATHS POUR AFFICHER SUR LE NAVIGATEUR - SI AFFICHAGE SANS ERREUR, ON COMMIT LE PROJET SUR GIT ET CREATION DES BRANCHES
+// ---------------------------------------------------------------------------------------------------
+
+    symfony console make:entity                         // Créer une entité namespace au projet
+
+    symfony console make:user User                      // Création de l'entity user (entity spécifique donc sécurité accrue)
+                                                        // symfony console make:entity pour modifier le tableau de "User"
+                                                        // Commenter la ligne 70 - $roles[] = 'ROLE_USER';
+                                                        // et ajouter tout à la fin de la classe User :
+                                                        //      public function getFullname(): string
+                                                                {
+                                                                    return $this->getFirstname() . ' ' . $this->getLastname();
+                                                                }
+                                                        // pour récupérer le nom et prénom avec la fonction getFullname() plus loin dans la projet si besoin.
+    
+    symfony console doctrine:database:create            // Créer une base de donnée en sql
+    symfony console d:d:c                               // RACCOURCI
+
+// ---------------------------------------------------------------------------------------------------
+INSTALLER LE GEDMO
+// ---------------------------------------------------------------------------------------------------
+
+    composer require gedmo/doctrine-extensions          // Pour le CREATEDAT/UPDATEDAT/DELETEDAT
+                                                        // Indiquer les use TimestampableEntity / use SoftDeleteableEntity;
+
+// ---------------------------------------------------------------------------------------------------
+PASSEZ AUX PAGES D'INSCRIPTION / CONNEXION
+// ---------------------------------------------------------------------------------------------------
+
+    symfony console doctrine:schema:update --force      // Mettre à jour une table qu a été modifié dans la BDD
+    symfony console d:s:u -f                            // Raccourci
+
+    symfony console make:form NomFormType               // Pour créer le formulaire d'inscription rattaché à l'entity User
+
+    symfony console make:auth                           // Installation du process de connexion, création du controller Security
+
+// ---------------------------------------------------------------------------------------------------
+MAKE ENTITY DE VOTRE PROJET SI BESOIN
+// ---------------------------------------------------------------------------------------------------
+
+    symfony console make:entity                         // Créer une entité namespace au projet
+
+// ---------------------------------------------------------------------------------------------------
+UNE FOIS QUE LES ENTITIES SONT CONFIGURES AINSI QUE LES RELATIONS, ON PASSE AU FIXTURES
+// ---------------------------------------------------------------------------------------------------
+
+    composer require --dev orm-fixtures                 // Permet d'installer les fonctionnalités des fixtures qui permettent d'insérer de fausses data dans la BDD
+
+    symfony console make:fixtures                       // Pour créer des fixtures
+
+    symfony console doctrine:fixtures:load              // Pour loader les fixtures dans la BDD
+
+// ---------------------------------------------------------------------------------------------------
+PREPARER L'ESPACE ADMIN - CONTROLE DES ACCES ETC... DE-COMMENTEZ LA LIGNE 34 ACCESS_CONTROL DU FICHIER SECURITY.YAML PUIS CREER LA CONFIG JUSTE EN-DESSOU DU ACCESS_CONTROL :
+// ---------------------------------------------------------------------------------------------------
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+
+// ---------------------------------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+symfony console doctrine:database:drop --force      // Supprimer une base de donnée dans sql
+
+
+symfony console make                                // Pour faire apparaître tous les MAKE:... de Symfony
+
+
+npm / yarn run watch                                // pour compiler automatiquement les modifs apportés dans assets/styles/app.css relié à public/build/app.css
+
+
+// ------------------------------------ En cas d'erreur ----------------------------------------------
+rmdir nom-du-projet                                 // Pour supprimer le projet
+
+mv ancien-nom-du-projet nouveau-nom-du-projet       // Modifier le nom du projet puis ouvrir le fichier composer.json de votre projet
+                                                    // et recherchez la ligne suivante : "name":"ancien-nom-du-projet".
+                                                    // Remplacez "ancien-nom-du-projet" par le nouveau nom de votre projet. Enregistrez le fichier composer.json.
+                                                    // Ouvrez une nouvelle fenêtre de terminal et naviguez vers le dossier de votre projet.
+
+composer install                                    // Exécutez cette commande pour mettre à jour le nom de votre projet dans l'installation de Symfony.
+// ---------------------------------------------------------------------------------------------------
+
+
+// ----------------------------- Facultatif : pas besoin en LOCAL --------------------------------------
+symfony console make:migration                      // Pour synchroniser l'entity avec le SQL BDD créée
+
+symfony console doctrine:migrations:migrate         // Pour finaliser la synchro avec la BDD dans phpmyadmin
+// -----------------------------------------------------------------------------------------------------
+
+
+// -------------------------------------- Connexion -----------------------------------------------
+symfony console make:auth                           // installation du process de connexion
+
+
+// ------------------------------------ Autres commandes ------------------------------------------
+
+composer require knplabs/knp-time-bundle            // Pour moduler les "Created 6 hours AGO" - "Créé IL Y A 6 heures"
