@@ -131,3 +131,20 @@ symfony console make:auth                           // installation du process d
 // ------------------------------------ Autres commandes ------------------------------------------
 
 composer require knplabs/knp-time-bundle            // Pour moduler les "Created 6 hours AGO" - "Créé IL Y A 6 heures"
+
+
+// ------------------------------------------------------------------------------------------------
+
+Pour cloner un projet : 
+
+composer install                                    // Exécutez cette commande pour mettre à jour le vendor /cache / log etc...
+
+npm / yarn install                                  // pour installer les nodes_modules etc...
+
+yarn / npm run dev                                  // Pour mettre à jour les modules
+
+DDC                                                 // Pour créer la BDD
+
+DSU                                                 // Pour update la BDD avec le clone du projet
+
+symfony server:start                                // Check si le projet est bien installé
