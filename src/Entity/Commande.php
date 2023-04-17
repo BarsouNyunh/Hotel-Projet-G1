@@ -2,28 +2,33 @@
 
 namespace App\Entity;
 
-use App\Repository\CommandeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
 {
+    use TimestampableEntity;
+    use SoftDeleteableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_debut = null;
+    private ?\DateTimeInterface $dateDebut = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_fin = null;
+    private ?\DateTimeInterface $dateFin = null;
 
     #[ORM\Column(length: 5)]
-    private ?string $prix_total = null;
+    private ?string $prixTotal = null;
 
     #[ORM\Column(length: 80)]
     private ?string $prenom = null;
@@ -37,6 +42,9 @@ class Commande
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    #[ORM\ManyToOne(inversedBy: 'chambre')]
+    private ?Chambre $chambre = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,36 +52,36 @@ class Commande
 
     public function getDateDebut(): ?\DateTimeInterface
     {
-        return $this->date_debut;
+        return $this->dateDebut;
     }
 
-    public function setDateDebut(\DateTimeInterface $date_debut): self
+    public function setDateDebut(\DateTimeInterface $dateDebut): self
     {
-        $this->date_debut = $date_debut;
+        $this->dateDebut = $dateDebut;
 
         return $this;
     }
 
     public function getDateFin(): ?\DateTimeInterface
     {
-        return $this->date_fin;
+        return $this->dateFin;
     }
 
-    public function setDateFin(\DateTimeInterface $date_fin): self
+    public function setDateFin(\DateTimeInterface $dateFin): self
     {
-        $this->date_fin = $date_fin;
+        $this->dateFin = $dateFin;
 
         return $this;
     }
 
     public function getPrixTotal(): ?string
     {
-        return $this->prix_total;
+        return $this->prixTotal;
     }
 
-    public function setPrixTotal(string $prix_total): self
+    public function setPrixTotal(string $prixTotal): self
     {
-        $this->prix_total = $prix_total;
+        $this->prixTotal = $prixTotal;
 
         return $this;
     }
@@ -122,6 +130,18 @@ class Commande
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getChambre(): ?Chambre
+    {
+        return $this->chambre;
+    }
+
+    public function setChambre(?Chambre $chambre): self
+    {
+        $this->chambre = $chambre;
 
         return $this;
     }

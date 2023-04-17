@@ -2,13 +2,21 @@
 
 namespace App\Entity;
 
-use App\Repository\ChambreRepository;
+use App\Entity\Commande;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ChambreRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 
 #[ORM\Entity(repositoryClass: ChambreRepository::class)]
 class Chambre
 {
+    use TimestampableEntity;
+    use SoftDeleteableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -18,16 +26,24 @@ class Chambre
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $description_courte = null;
+    private ?string $descriptionCourte = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $description_longue = null;
+    private ?string $descriptionLongue = null;
 
     #[ORM\Column(length: 255)]
     private ?string $photo = null;
 
     #[ORM\Column(length: 4)]
-    private ?string $prix_journalier = null;
+    private ?string $prixJournalier = null;
+
+    #[ORM\OneToMany(mappedBy: 'chambre', targetEntity: Commande::class)]
+    private Collection $chambre;
+
+    public function __construct()
+    {
+        $this->chambre = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -48,24 +64,24 @@ class Chambre
 
     public function getDescriptionCourte(): ?string
     {
-        return $this->description_courte;
+        return $this->descriptionCourte;
     }
 
-    public function setDescriptionCourte(string $description_courte): self
+    public function setDescriptionCourte(string $descriptionCourte): self
     {
-        $this->description_courte = $description_courte;
+        $this->descriptionCourte = $descriptionCourte;
 
         return $this;
     }
 
     public function getDescriptionLongue(): ?string
     {
-        return $this->description_longue;
+        return $this->descriptionLongue;
     }
 
-    public function setDescriptionLongue(string $description_longue): self
+    public function setDescriptionLongue(string $descriptionLongue): self
     {
-        $this->description_longue = $description_longue;
+        $this->descriptionLongue = $descriptionLongue;
 
         return $this;
     }
@@ -84,12 +100,42 @@ class Chambre
 
     public function getPrixJournalier(): ?string
     {
-        return $this->prix_journalier;
+        return $this->prixJournalier;
     }
 
-    public function setPrixJournalier(string $prix_journalier): self
+    public function setPrixJournalier(string $prixJournalier): self
     {
-        $this->prix_journalier = $prix_journalier;
+        $this->prixJournalier = $prixJournalier;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getChambre(): Collection
+    {
+        return $this->chambre;
+    }
+
+    public function addChambre(Commande $chambre): self
+    {
+        if (!$this->chambre->contains($chambre)) {
+            $this->chambre->add($chambre);
+            $chambre->setChambre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChambre(Commande $chambre): self
+    {
+        if ($this->chambre->removeElement($chambre)) {
+            // set the owning se to null (unless already changed)
+            if ($chambre->getChambre() === $this) {
+                $chambre->setChambre(null);
+            }
+        }
 
         return $this;
     }
