@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Spa | Protel{% endblock %}
+
+{% block body %}
+
+    <section class="hero-section d-flex flex-column justify-content-center align-items-center text-center">
+        <h1 class="display-4 mt-5">Le Spa</h1>
+        <p class="lead">Bienvenue dans notre spa luxueux et relaxant</p>
+    </section>
+
+    <section class="service-section">
+        <hr class="my-4 text-light">
+        <div class="container mb-5">
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <div class="card">
+                        <img src="https://unsplash.it/300/200" alt="Spa avec soin Détente" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Spa avec soin Détente</h5>
+                            <p class="card-text">Description du soin détente.</p>
+                            <a href="#" class="btn btn-primary">Fiche soin</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <div class="card">
+                        <img src="https://unsplash.it/300/200" alt="Spa avec soin Relaxant" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Spa avec soin Relaxant</h5>
+                            <p class="card-text">Description du soin relaxant.</p>
+                            <a href="#" class="btn btn-primary">Fiche soin</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5">
+                    <div class="card">
+                        <img src="https://unsplash.it/300/200" alt="Spa avec soin Plaisir" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Spa avec soin Plaisir</h5>
+                            <p class="card-text">Description du soin plaisir.</p>
+                            <a href="#" class="btn btn-primary">Fiche soin</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero-section d-flex flex-column justify-content-center align-items-center text-center mb-5">
+        <img src="https://unsplash.it/1900/700" alt="Spa avec soin Détente" class="card-img-top">
+    </section>    
+
+{% endblock %}
