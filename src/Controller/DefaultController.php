@@ -25,4 +25,11 @@ class DefaultController extends AbstractController
     {
         return $this->render('default/show_resto.html.twig');
     }
+
+    #[Route('/nos-chambres', name: 'show_chambre', methods: ['GET'])]
+    public function showChambre(): Response
+    {
+        return $this->render('chambre/show_chambre.html.twig');
+    } // end showChambre()
+
 }

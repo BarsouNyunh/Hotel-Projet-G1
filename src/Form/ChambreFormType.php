@@ -4,12 +4,13 @@ namespace App\Form;
 
 use App\Entity\Chambre;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
 class ChambreFormType extends AbstractType
@@ -28,7 +29,17 @@ class ChambreFormType extends AbstractType
             ])
             ->add('photo', FileType::class, [
                 'label' => 'Photo',
-                'data_class' => null
+                'data_class' => null,
+                'mapped' => false,
+                'attr' => [
+                    'class' => $options['photo'] !== null ? $options['photo'] : ''
+                ],
+                'constraints' => [
+                    new Image([
+                        'mimeTypes' => ['image/jpeg', 'image/png'],
+                        'maxSize' => '5M'
+                    ]) 
+                ]
             ])
             ->add('prixJournalier', TextType::class, [
                 'label' => 'prix du chambre'
