@@ -6,6 +6,7 @@ use DateTime;
 use App\Entity\Membre;
 use App\Form\MembreFormType;
 use App\Repository\MembreRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,8 +17,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class MembreController extends AbstractController
 {
     // --------------------------------------- REGISTER ---------------------------------------
-    #[Route('/inscription', name: 'create_membre', methods: ['GET', 'POST'])]
-    public function register(Request $request, MembreRepository $membreRepository, UserPasswordHasherInterface $hasher): Response
+    #[Route('/', name: 'create_membre', methods: ['GET', 'POST'])]
+    public function register(Request $request, MembreRepository $membreRepository, UserPasswordHasherInterface $hasher, EntityManagerInterface $entityManager): Response
     {
         $membre = new Membre();
 
@@ -38,12 +39,15 @@ class MembreController extends AbstractController
 
             $this->addFlash('success', "L'ajout d'un nouveau administrateur, DONE !");
 
-            return $this->redirectToRoute('create_membre');
+            return $this->redirectToRoute('dash_admin');
         } // end if($form_membre)
+
+        $membres = $entityManager->getRepository(Membre::class)->findBy(['deletedAt' => null]);
 
         return $this->render('admin/register.html.twig', [
             'form_membre' => $form_membre->createView(),
             'membre' => $membre,
+            'membres' => $membres,
         ]);
     } // end register()
     // ----------------------------------------------------------------------------------------

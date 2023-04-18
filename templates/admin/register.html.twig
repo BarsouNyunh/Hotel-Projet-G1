@@ -32,19 +32,21 @@
             </thead>
 
             <tbody>
+                {% for membre in membres %}
                     <tr class="text-center">
-                        <th class="text-center text-dark align-middle"></th>
-                        <td class="text-center text-dark align-middle"></td>
-                        <td class="text-center text-dark align-middle"></td>
-                        <td class="text-center text-dark align-middle"></td>
-                        <td class="text-center text-dark align-middle"></td>
-                        <td class="text-center text-dark align-middle"></td>
-                        <td class="text-center text-dark align-middle"></td>
+                        <th class="text-center text-dark align-middle">{{ membre.id }}</th>
+                        <td class="text-center text-dark align-middle">{{ membre.roles | first }}</td>
+                        <td class="text-center text-dark align-middle">{{ membre.password }}</td>
+                        <td class="text-center text-dark align-middle">{{ membre.prenom }}</td>
+                        <td class="text-center text-dark align-middle">{{ membre.nom }}</td>
+                        <td class="text-center text-dark align-middle">{{ membre.email }}</td>
+                        <td class="text-center text-dark align-middle">{{ membre.civilite }}</td>
                         <td class="text-center text-dark align-middle">
                             <a href="" class="text-info align-middle text-center" title="Modifier"><i class="bi bi-pencil-square mx-1"></i></a>
                             <a href="" class="text-danger align-middle text-center" title="Supprimer"><i class="bi bi-trash3 mx-1"></i></a>
                         </td>
                     </tr>
+                {% endfor %}
             </tbody>
         </table>
     
