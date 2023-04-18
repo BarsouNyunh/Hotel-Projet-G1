@@ -13,7 +13,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ path("show_home") }}">Home</a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('show_chambre') }}">Chambre</a>
                 </li>
@@ -39,6 +38,7 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
 
+                {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Admin
@@ -51,6 +51,10 @@
                         <li><a class="dropdown-item" href="#">Commande</a></li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_logout') }}">Deconnexion</a>
+                </li>
+                {% endif %}
 
             </ul>
         </div>

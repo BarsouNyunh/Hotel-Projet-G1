@@ -11,13 +11,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/admin')]
 class MembreController extends AbstractController
 {
     // --------------------------------------- REGISTER ---------------------------------------
-    #[Route('/', name: 'create_membre', methods: ['GET', 'POST'])]
+    #[Route('/dash-admin', name: 'create_membre', methods: ['GET', 'POST'])]
     public function register(Request $request, MembreRepository $membreRepository, UserPasswordHasherInterface $hasher, EntityManagerInterface $entityManager): Response
     {
         $membre = new Membre();
@@ -39,7 +40,7 @@ class MembreController extends AbstractController
 
             $this->addFlash('success', "L'ajout d'un nouveau administrateur, DONE !");
 
-            return $this->redirectToRoute('dash_admin');
+            return $this->redirectToRoute('create_membre');
         } // end if($form_membre)
 
         $membres = $entityManager->getRepository(Membre::class)->findBy(['deletedAt' => null]);
