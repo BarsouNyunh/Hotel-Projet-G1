@@ -4,76 +4,86 @@
 
 {% block body %}
 
-<h1 class="text-center my-4">Tableau admin inscrits</h1>
+    <h1 class="text-center my-4">Tableau admin inscrits</h1>
 
-    {# ################# FLASHES ################# #}
+        {# ################# FLASHES ################# #}
     <div class="row">
         <div class="col-6 mx-auto">
             {% include 'include/_flashes.html.twig' %}
         </div>
     </div>
-    {# ################# FLASHES ################# #}
-
-<div class="row">
-
-    <div class="col-10 mx-auto my-4">
-        <table class="table">
-            <thead>
-                <tr class="text-center text-dark align-middle">
-                    <th>#</th>
-                    <th>Rôle</th>
-                    <th>Mot de passe</th>
-                    <th>Prénom</th>
-                    <th>Nom</th>
-                    <th>Email</th>
-                    <th>Civilité</th>
-                    <th>Option</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for membre in membres %}
-                    <tr class="text-center">
-                        <th class="text-center text-dark align-middle">{{ membre.id }}</th>
-                        <td class="text-center text-dark align-middle">{{ membre.roles | first }}</td>
-                        <td class="text-center text-dark align-middle">{{ membre.password }}</td>
-                        <td class="text-center text-dark align-middle">{{ membre.prenom }}</td>
-                        <td class="text-center text-dark align-middle">{{ membre.nom }}</td>
-                        <td class="text-center text-dark align-middle">{{ membre.email }}</td>
-                        <td class="text-center text-dark align-middle">{{ membre.civilite }}</td>
-                        <td class="text-center text-dark align-middle">
-                            <a href="" class="text-info align-middle text-center" title="Modifier"><i class="bi bi-pencil-square mx-1"></i></a>
-                            <a href="" class="text-danger align-middle text-center" title="Supprimer"><i class="bi bi-trash3 mx-1"></i></a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    
-    </div>
-
-    <h1 class="text-center my-4">Inscrire un nouveau admin</h1>
+        {# ################# FLASHES ################# #}
 
     <div class="row">
-        <div class="row col-10 mx-auto my-4">
 
-            {{ form_start(form_membre) }}
-            <div class="row">
-                <div class="col-4">{{ form_row(form_membre.prenom) }}</div>
-                <div class="col-4">{{ form_row(form_membre.nom) }}</div>
-                <div class="col-4">{{ form_row(form_membre.civilite) }}</div>
+        <div class="row">
+            <div class="col-11 text-end">
+                <a class=" btn btn-sm btn-outline-secondary" href="#">Voir les archives</a>
             </div>
-
-            <div class="row">
-                <div class="col-6">{{ form_row(form_membre.email) }}</div>
-                <div class="col-6">{{ form_row(form_membre.password) }}</div>
-            </div>
-            {{ form_end(form_membre) }}
-
         </div>
-    </div>
-    
 
-</div>
+        <div class="col-10 mx-auto my-4">
+            <table class="table">
+                <thead>
+                    <tr class="text-center text-dark align-middle">
+                        <th>#</th>
+                        <th>Rôle</th>
+                        <th>Mot de passe</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Civilité</th>
+                        <th>Option</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for membre in membres %}
+                        <tr class="text-center">
+                            <th class="text-center text-dark align-middle">{{ membre.id }}</th>
+                            <td class="text-center text-dark align-middle">{{ membre.roles | first }}</td>
+                            <td class="text-center text-dark align-middle">{{ membre.password }}</td>
+                            <td class="text-center text-dark align-middle">{{ membre.prenom }}</td>
+                            <td class="text-center text-dark align-middle">{{ membre.nom }}</td>
+                            <td class="text-center text-dark align-middle">{{ membre.email }}</td>
+                            <td class="text-center text-dark align-middle">{{ membre.civilite }}</td>
+                            <td class="text-center text-dark align-middle">
+                                <a href="{{ path('update_membre', {'id': membre.id}) }}" class="text-info align-middle text-center" title="Modifier"><i class="bi bi-pencil-square mx-1"></i></a>
+                                <a href="{{ path('soft_delete_membre', {'id': membre.id}) }}" class="text-danger align-middle text-center" title="Supprimer"><i class="bi bi-trash3 mx-1"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        
+        </div>
+
+        {% if membre.id is defined %}
+        <h1 class="text-center my-4">Modifier l'admin</h1>
+        {% else %}
+        <h1 class="text-center my-4">Inscrire l'admin</h1>
+        {% endif %}
+
+        <div class="row">
+            <div class="row col-10 mx-auto my-4">
+
+                {{ form_start(form_membre) }}
+                <div class="row">
+                    <div class="col-4">{{ form_row(form_membre.prenom) }}</div>
+                    <div class="col-4">{{ form_row(form_membre.nom) }}</div>
+                    <div class="col-4">{{ form_row(form_membre.civilite) }}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">{{ form_row(form_membre.email) }}</div>
+                    <div class="col-6">{{ form_row(form_membre.password) }}</div>
+                </div>
+                {{ form_end(form_membre) }}
+
+            </div>
+        </div>
+        
+
+    </div>
 
 {% endblock %}
