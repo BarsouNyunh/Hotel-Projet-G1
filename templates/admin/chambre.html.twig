@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Chambres{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center my-4">Chambre</h1>
+
+    <div class="row">
+        <div class="col-8 mx-auto">
+
+        {{ form(form_chambre) }}
+
+        </div>
+    </div>
+
+    <h1 class="text-center my-3 text-warning">Les Archives</h1>
+
+{#-------------------------FLASHES------------------------------#}
+
+ <div class="row">
+        <div class="col-6 mx-auto">
+            {% include 'include/_flashes.html.twig' %}
+        </div>
+    </div>
+{#-------------------------------------------------------#}
+
+ {# <div class="row">
+        <div class="col-10 mx-auto my-4">
+
+            <h2 class="text-center">Tous les chambre archivés</h2>
+
+            <table class="table">
+              
+              <thead>
+                  <tr class="text-center">
+                      <th>#</th>
+                      <th>Titre</th>
+                      <th>Description courte</th>
+                      <th>Description longue</th>
+                      <th>Photo</th>
+                      <th>Prix journalier</th>
+                      <th>Modifié</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+
+                 {% for chambre in chambres %}
+
+                   <tr class="text-center align-middel">
+                      
+                       <td>{{ chambre.id }}</td>
+                       <td>{{ chambre.title | length > 20 ? chambre.title | slice(0,20) ~ '...' : chambre.title }}</td>
+                       <td>{{ chambre.descriptionCourte }}</td>
+                         <td>{{ chambre.descriptionLongue }}</td>
+                       <td><img width="150" length="150" class="img-fluid" src="{{ asset('uploads/' ~ chambre.photo)}}" alt="{{ chambre.title}}"></td>
+                       <td>{{ chambre.createdAt | date('d/m/Y') }}</td>
+                       <td>{{ chambre.deletedAt | date('d/m/Y') }}</td>
+                       <td>
+                         <a href="{{ path('restore_chambre',{'id': chambre.id}) }}" class="btn btn-sm btn-info" title="Modifier"><i class="bi bi-reply-all-fill"></i></a>
+                         <a href="{{ path('hard_delete_chambre',{'id': chambre.id}) }}" onclick="return confirm('Voulez-vous vraiment supprimer définitivement cette article?')" class="btn btn-sm btn-danger" title="Archiver"><i class="bi bi-trash3"></i></a>
+                       </td>
+                   </tr>
+
+                 {% endfor %}
+              </tbody>
+            </table>
+
+
+        </div>
+    </div> #}
+
+
+{% endblock %}
