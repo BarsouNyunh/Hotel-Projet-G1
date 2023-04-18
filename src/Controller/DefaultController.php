@@ -19,4 +19,10 @@ class DefaultController extends AbstractController
     {
         return $this->render('default/show_spa.html.twig');
     }
+    
+    #[Route('/notre-resto', name: 'show_resto', methods: ['GET'])]
+    public function showResto(): Response
+    {
+        return $this->render('default/show_resto.html.twig');
+    }
 }
