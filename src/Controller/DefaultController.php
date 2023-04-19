@@ -12,13 +12,9 @@ class DefaultController extends AbstractController
 {
     // ----------------------------- RENDERING DEFAULT-PAGES ----------------------------
     #[Route('/', name: 'show_home', methods: ['GET'])]
-    public function showHome(Slider $slider, SliderRepository $sliderRepository): Response
+    public function showHome(): Response
     {
-        $sliders = $sliderRepository->findBy(['deletedAt' => null]);
-
         return $this->render('default/show_home.html.twig', [
-            'sliders' => $sliders,
-            'slider' => $slider,
         ]);
     }
 

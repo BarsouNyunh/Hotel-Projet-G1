@@ -3,7 +3,7 @@
 {% block title %}Home | Protel{% endblock %}
 
 {% block body %}
-    {% for slider in sliders %}
+    {# {% for slider in sliders %} #}
     <section class="hero">
         <div id="carouselExample" class="carousel slide" data-ride="carousel">
             <!-- Indicateurs du carousel -->
@@ -15,7 +15,7 @@
             <!-- Slides du carousel -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ asset('uploads/' ~ slider.photo.ordre[2]) }}" alt="Image 1" class!"img-fluid">
+                    <img src="https://unsplash.it/1900/700" alt="Image 1" class!"img-fluid">
                     <div class="carousel-caption">
                         <h1>Chambres</h1>
                         <p>Tous types de chambres selon vos envies</p>
@@ -47,7 +47,7 @@
             </a>
         </div>
     </section>
-    {% endfor %}
+    {# {% endfor %} #}
 
     <!-- Section des fonctionnalités -->
     <section class="features my-5">
