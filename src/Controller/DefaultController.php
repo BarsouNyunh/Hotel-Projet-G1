@@ -2,16 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Slider;
+use App\Repository\SliderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
+    // ----------------------------- RENDERING DEFAULT-PAGES ----------------------------
     #[Route('/', name: 'show_home', methods: ['GET'])]
     public function showHome(): Response
     {
-        return $this->render('default/show_home.html.twig');
+        return $this->render('default/show_home.html.twig', [
+        ]);
     }
 
     #[Route('/spa', name: 'show_spa', methods: ['GET'])]
@@ -31,5 +35,6 @@ class DefaultController extends AbstractController
     {
         return $this->render('chambre/show_chambre.html.twig');
     } // end showChambre()
+    // ----------------------------------------------------------------------------------
 
 }

@@ -3,7 +3,7 @@
 {% block title %}Home | Protel{% endblock %}
 
 {% block body %}
-
+    {# {% for slider in sliders %} #}
     <section class="hero">
         <div id="carouselExample" class="carousel slide" data-ride="carousel">
             <!-- Indicateurs du carousel -->
@@ -47,6 +47,7 @@
             </a>
         </div>
     </section>
+    {# {% endfor %} #}
 
     <!-- Section des fonctionnalités -->
     <section class="features my-5">
@@ -56,20 +57,20 @@
                 <div class="col-lg-4">
                     <img src="https://unsplash.it/300/200" alt="Fonctionnalité 1" class!"img-fluid">
                     <h2>Chambres</h2>
-                    <p>Venez découvrir nos chambres pour vos plus grand confort !</p>
-                    <a href="#" class="btn btn-secondary w-75">Découvrir les chambres</a>
+                    <p>Venez découvrir nos chambres pour vos plus grand confort !<br></p>
+                    <a href="{{ path('show_chambre') }}" class="btn btn-secondary w-75">Découvrir les chambres</a>
                 </div>
                 <div class="col-lg-4">
                     <img src="https://unsplash.it/300/200" alt="Fonctionnalité 2" class!"img-fluid">
                     <h2>Restaurant</h2>
-                    <p>Nos plats sont confectionnées à la minute par notre chef cuisinier 10 étoiles Michelin, chaque jour.</p>
-                    <a href="#" class="btn btn-secondary w-75">Voir la carte</a>
+                    <p>Nos plats sont confectionnées à la minute par notre chef cuisinier 10 étoiles Michelin, chaque jour.<br></p>
+                    <a href="{{ path("show_resto") }}" class="btn btn-secondary w-75">Voir la carte</a>
                 </div>
                 <div class="col-lg-4">
                     <img src="https://unsplash.it/300/200" alt="Fonctionnalité 3" class!"img-fluid">
                     <h2>Spa</h2>
-                    <p>Détendez-vous et offrez vous un massage digne d'un contorsionniste dont vous vous rappellerez longtemps.</p>
-                    <a href="#" class="btn btn-secondary w-75">Les tortures</a>
+                    <p>Détendez-vous et offrez vous un massage digne d'un contorsionniste dont vous vous rappellerez longtemps.<br></p>
+                    <a href="{{ path('show_spa') }}" class="btn btn-secondary w-75">Les tortures</a>
                 </div>
                 <hr class="my-5 text-light">
             </div>
