@@ -63,7 +63,7 @@ class MembreFormType extends AbstractType
                 ]
             ])
             ->add('submit', SubmitType::class, [
-                'label' => $options['prenom'] === null ? "Modifier" : "Enregistrer membre",
+                'label' => "Enregistrer membre",
                 'validate' => false,
                 'attr' => [
                     'class' => "d-block mx-auto my-3 col-4 btn btn-lg btn-outline-success"
@@ -76,7 +76,7 @@ class MembreFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Membre::class,
-            'prenom' => null,
+            'membre' => null,
         ]);
     }
 }
