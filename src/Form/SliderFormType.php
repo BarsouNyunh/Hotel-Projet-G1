@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Chambre;
+use App\Entity\Slider;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Image;
@@ -10,23 +10,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-
-class ChambreFormType extends AbstractType
+class SliderFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre', TextType::class, [
-                'label' => 'Titre du chambre'
-            ])
-            ->add('descriptionCourte', TextareaType::class, [
-                'label' => 'Description courte de la chambre'
-            ])
-            ->add('descriptionLongue', TextareaType::class, [
-                'label' =>  'Description longue de la chambre'
-            ])
             ->add('photo', FileType::class, [
                 'label' => 'Photo',
                 'data_class' => null,
@@ -41,16 +30,15 @@ class ChambreFormType extends AbstractType
                     ]) 
                 ]
             ])
-            ->add('prixJournalier', TextType::class, [
-                'label' => 'prix du chambre'
+            ->add('ordre', TextType::class, [
+                'label' => "Ordre"
             ])
             ->add('submit', SubmitType::class, [
-            'label' => "Ajouter",
-            'validate' => false,
-            'attr' => [
-                'class' => "d-block mx-auto my-3 btn btn-success col-3"
-            ],
-
+                'label' => "Enregistrer slider",
+                'validate' => false,
+                'attr' => [
+                    'class' => "d-block mx-auto my-3 col-4 btn btn-lg btn-outline-success"
+                ],
             ])
         ;
     }
@@ -58,7 +46,7 @@ class ChambreFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Chambre::class,
+            'data_class' => Slider::class,
             'allow_file_upload' => true,
             'photo' => null
         ]);
