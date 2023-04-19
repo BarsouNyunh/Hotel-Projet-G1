@@ -46,7 +46,6 @@ class MembreController extends AbstractController
 
         return $this->render('admin/register.html.twig', [
             'form_membre' => $form_membre->createView(),
-            'membre' => $membre,
             'membres' => $membres,
         ]);
     } // end register()
