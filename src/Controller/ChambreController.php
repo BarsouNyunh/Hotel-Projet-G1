@@ -6,6 +6,7 @@ use DateTime;
 use App\Entity\Chambre;
 use App\Form\ChambreFormType;
 use App\Repository\ChambreRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +19,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class ChambreController extends AbstractController
 {
     #[Route('/ajouter-chambre', name: 'create_chambre', methods: ['GET', 'POST'])]
-    public function createChambre(ChambreRepository $repository, Request $request, SluggerInterface $slugger): Response
+    public function createChambre(ChambreRepository $repository, Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
         $chambre = new Chambre();
 
@@ -41,10 +42,14 @@ class ChambreController extends AbstractController
             $this->addFlash('success', "la chambre est été ajouté avec succès !");
             return $this->redirectToRoute('create_chambre');
         } // end if($form_chambre)
+
+        $chambres = $entityManager->getRepository(chambre::class)->findBy(['deletedAt' => null]);
         
         
         return $this->render('admin/chambre.html.twig', [
             'form_chambre' => $form_chambre->createView(),
+            'chambre' => $chambre,
+            'chambres' => $chambres
         ]);
     } // end ajouterChambre()
 
