@@ -3,39 +3,41 @@
 {% block title %}Home | Protel{% endblock %}
 
 {% block body %}
-    {# {% for slider in sliders %} #}
+    
     <section class="hero">
-        <div id="carouselExample" class="carousel slide" data-ride="carousel">
+        <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="4000">
             <!-- Indicateurs du carousel -->
             <ol class="carousel-indicators">
                 <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExample" data-slide-to="1"></li>
                 <li data-target="#carouselExample" data-slide-to="2"></li>
             </ol>
+
             <!-- Slides du carousel -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://unsplash.it/1900/700" alt="Image 1" class!"img-fluid">
+                    <img src="{{ asset('uploads/' ~ slider1.photo) }}" alt="Image 1" class="img-fluid">
                     <div class="carousel-caption">
                         <h1>Chambres</h1>
                         <p>Tous types de chambres selon vos envies</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://unsplash.it/1900/700" alt="Image 2" class!"img-fluid">
+                    <img src="{{ asset('uploads/' ~ slider2.photo) }}" alt="Image 2" class="img-fluid">
                     <div class="carousel-caption">
                         <h1>Restaurant</h1>
                         <p>Restaurant 8 étoiles Michelin pour vos petits déjeunés, brunchs et goûtés</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://unsplash.it/1900/700" alt="Image 3" class!"img-fluid">
+                    <img src="{{ asset('uploads/' ~ slider3.photo) }}" alt="Image 3" class="img-fluid">
                     <div class="carousel-caption">
                         <h1>Spa</h1>
                         <p>Rien que pour vos articulations, pour votre futur en tant que contorsionniste</p>
                     </div>
                 </div>
             </div>
+
             <!-- Contrôles du carousel -->
             <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -47,7 +49,7 @@
             </a>
         </div>
     </section>
-    {# {% endfor %} #}
+    
 
     <!-- Section des fonctionnalités -->
     <section class="features my-5">
