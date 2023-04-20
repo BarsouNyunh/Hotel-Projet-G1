@@ -76,7 +76,6 @@ class MembreFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Membre::class,
-            'membre' => null,
         ]);
     }
 }
