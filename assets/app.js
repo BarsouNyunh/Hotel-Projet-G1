@@ -14,20 +14,17 @@ import './bootstrap';
 let macarte;
 let zoom = 17; // 1-20
 let marqueur;
-let URLAPICARTO = 'https://nominatim.openstreetmap.org/search/';
-
 
 /* L'API possède une fonction qui l'adresse à partir de coordonnées 
-   https://nominatim.openstreetmap.org/reverse?lat=42&lon=128format=json
+    https://nominatim.openstreetmap.org/reverse?lat=42&lon=128format=json
 */
-
 
 navigator.geolocation.getCurrentPosition(function (infos) {
 
     console.log(infos);
     let lat = 48.865184;
     let lon = 2.303118;
- 
+
     // L symbolise l'object leaflet
     macarte = L.map(document.getElementById('carte')).setView([lat,lon],zoom);
 
@@ -42,6 +39,4 @@ navigator.geolocation.getCurrentPosition(function (infos) {
 
     marqueur = L.marker([lat,lon]).addTo(macarte).bindPopup('Nous sommes ici !').openPopup();
 
-
-    
 });
