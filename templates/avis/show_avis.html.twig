@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avis | Protel{% endblock %}
+
+{# {% block javascripts %}
+    parent()
+    <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '.editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+
+{% endblock %} #}
+
+{% block body %}
+
+    <h1 class="text-center my-4"> AVIS </h1>
+
+    <div class="row">
+
+        <div class="col-10 mx-auto my-3">
+            {% include 'include/_flashes.html.twig' %}
+        </div>
+            
+    </div>
+
+    <div class="row">
+        <div class="col-5 mx-auto my-3">
+
+            {{ form_start(form ) }}
+
+                <div class="row">
+                    <div class="col-4">{{ form_row(form.pseudo) }}</div>
+                    <div class="col-4">{{ form_row(form.prenom) }}</div>
+                    <div class="col-4">{{ form_row(form.nom) }}</div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-6">{{ form_row(form.email) }}</div>
+                    <div class="col-6">{{ form_row(form.category) }}</div>
+                </div>
+
+                <div class="w-100" id="editor">
+                        {{ form_row(form.comment) }}
+                </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+  
+    
+    <div class="row">
+        <div class="col-6 mx-auto">
+
+            <h3 class="mb-4">Espace Avis :</h3>
+
+                {% for avis in avisTotal | reverse %}
+
+                    <div class="alert alert-dark mb-3" role="alert">
+                        <h4 class="alert-heading">{{ avis.pseudo }}<span class="h6"> posté le {{ avis.createdAt | date('d/m/Y') }}</span></h4>
+                        <p>{{ avis.comment }}</p>
+                        <hr>
+                        <p class="mb-0 col ms-auto">Partager :
+                            <a href="#"><i class="bi bi-instagram"></i></a>
+                            <a href="#"><i class="bi bi-twitter"></i></a>
+                            <a href="#"><i class="bi bi-facebook"></i></a>
+
+                            <a href="{{ path('soft_delete_avis', {'id': avis.id}) }}" class="btn btn-sm btn-danger"><i class="bi bi-x-circle-fill"></i></a>
+
+                            <a>{{ avis.category }}</a>
+                        </p>
+                    </div>
+                {% else %}    
+                    <div class="alert alert-warning mb-3" role="alert">
+                        <p class="text-center fw-bolder">Aucun avis pour le moment</p>
+                    </div>
+                {% endfor %}
+
+        </div>
+    </div> 
+
+{% endblock %}
